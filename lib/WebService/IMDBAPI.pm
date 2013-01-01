@@ -50,11 +50,8 @@ sub search_by_title {
     # TODO: get from options
     my $url = $self->_generate_url(
         {
-            title   => $title,
-            plot    => 'simple',
-            limit   => 1,
-            aka     => 'simple',
-            release => 'simple'
+            title => $title,
+            limit => 1
         }
     );
 
@@ -76,6 +73,30 @@ sub search_by_title {
 
 sub search_by_id {
     my ( $self, $id, $options ) = @_;
+
+    unless ($id) {
+
+        # TODO: do something
+    }
+
+    # TODO: parse options (merge hash?)
+
+    # TODO: get from options
+    my $url = $self->_generate_url( { id => $id } );
+
+    my $ua = LWP::UserAgent->new();
+    $ua->agent( $self->{user_agent} );
+    my $response = $ua->get($url);
+
+    if ( $response->is_success ) {
+
+        my $result = WebService::IMDBAPI::Result->new(
+            %{ decode_json( $response->content ) } );
+        return $result;
+    }
+    else {
+        die $response->status_line;
+    }
 }
 
 # generates a url from the options
