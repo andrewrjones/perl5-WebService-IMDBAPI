@@ -39,8 +39,7 @@ sub search_by_title {
     my ( $self, $title, $options ) = @_;
 
     unless ($title) {
-
-        # TODO: do something
+        die "title is required";
     }
     $options->{title} = $title;
 
@@ -63,8 +62,7 @@ sub search_by_id {
     my ( $self, $id, $options ) = @_;
 
     unless ($id) {
-
-        # TODO: do something
+        die "id is required";
     }
     $options->{id} = $id;
 
@@ -142,7 +140,7 @@ The language for the results. Defaults to C<en-US>.
 
 =method search_by_title( $title, $options )
 
-Searches based on a title. For the options and their defaults, see L<http://imdbapi.org/>.
+Searches based on a title. For the options and their defaults, see L<http://imdbapi.org/#search-by-title>.
 
 Some of the most common options are:
 
@@ -150,15 +148,27 @@ Some of the most common options are:
 
 =item limit
 
-Limits the number of results.
+Limits the number of results. Defaults to 1.
+
+=item plot
+
+The plot type you wish the API to return (none, simple or full). Defaults to simple.
+
+=item release
+
+The release date type you wish the API to return (simple or full). Defaults to simple.
 
 =back
+
+C<$title> is required. C<$options> are optional.
 
 Returns an array of L<WebService::IMDBAPI::Result> objects.
 
 =method search_by_id( $id, $options )
 
-Searches based on an IMDB ID. For the options and their defaults, see L<http://imdbapi.org/>.
+Searches based on an IMDB ID. For the options and their defaults, see L<http://imdbapi.org/#search-by-id>.
+
+C<$id> is required. C<$options> are optional.
 
 Returns a single L<WebService::IMDBAPI::Result> object.
 
