@@ -1,7 +1,6 @@
 *~
 *#
 .build
-WebService-TVDB-*
-lib/WebService/TVDB/Languages.pm
+WebService-IMDBAPI-*
 .*redcar
 .DS_Store
