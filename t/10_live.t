@@ -8,18 +8,21 @@ use Test::More;
 # skip tests if we are not online
 use HTTP::Online ':skip_all';
 
-plan tests => 4;
+plan tests => 5;
 
 use WebService::IMDBAPI;
 
 my $title   = 'The Notebook';
 my $imdb_id = 'tt0332280';
 my $imdbapi;
+my $results;
 my $result;
 
 $imdbapi = WebService::IMDBAPI->new();
 
-$result = $imdbapi->search_by_title($title);
+$results = $imdbapi->search_by_title( $title, { limit => 1 } );
+is( @{$results}, 1 );
+$result = $results->[0];
 is( $result->title,   $title );
 is( $result->imdb_id, $imdb_id );
 

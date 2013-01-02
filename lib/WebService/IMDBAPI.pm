@@ -51,10 +51,12 @@ sub search_by_title {
 
     if ( $response->is_success ) {
 
-        # TODO: will this work if we have more than one result?
-        my $result = WebService::IMDBAPI::Result->new(
-            %{ decode_json( $response->content )->[0] } );
-        return $result;
+        my @results;
+        for ( @{ decode_json( $response->content ) } ) {
+            my $result = WebService::IMDBAPI::Result->new( %{$_} );
+            push( @results, $result );
+        }
+        return \@results;
     }
     else {
         die $response->status_line;
