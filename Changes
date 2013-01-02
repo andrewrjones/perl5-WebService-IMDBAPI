@@ -1,4 +1,5 @@
 {{$NEXT}}
+    Ensure we can pass '0' as a URL parameter.
 
 1.130020  2013-01-02 12:58:44 Europe/London
     Initial version.

@@ -95,7 +95,7 @@ sub _generate_url {
     my $url = sprintf( "%s&lang=%s", BASE_URL, $self->{language} );
 
     while ( my ( $key, $value ) = each(%$options) ) {
-        $url .= sprintf( "&%s=%s", $key, $value );
+        $url .= sprintf( "&%s=%s", $key, $value || 0 );
     }
 
     return $url;
