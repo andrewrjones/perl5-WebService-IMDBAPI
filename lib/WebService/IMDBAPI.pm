@@ -44,11 +44,7 @@ sub search_by_title {
     }
     $options->{title} = $title;
 
-    my $url = $self->_generate_url($options);
-    my $ua  = LWP::UserAgent->new();
-    $ua->agent( $self->{user_agent} );
-    my $response = $ua->get($url);
-
+    my $response = $self->_do_search($options);
     if ( $response->is_success ) {
 
         my @results;
@@ -70,16 +66,9 @@ sub search_by_id {
 
         # TODO: do something
     }
+    $options->{id} = $id;
 
-    # TODO: parse options (merge hash?)
-
-    # TODO: get from options
-    my $url = $self->_generate_url( { id => $id } );
-
-    my $ua = LWP::UserAgent->new();
-    $ua->agent( $self->{user_agent} );
-    my $response = $ua->get($url);
-
+    my $response = $self->_do_search($options);
     if ( $response->is_success ) {
 
         my $result = WebService::IMDBAPI::Result->new(
@@ -91,10 +80,14 @@ sub search_by_id {
     }
 }
 
-# carries out the search
+# carries out the search and returns the response
 sub _do_search {
+    my ( $self, $options ) = @_;
 
-    # TODO: extract out the search request functionality to here.
+    my $url = $self->_generate_url($options);
+    my $ua  = LWP::UserAgent->new();
+    $ua->agent( $self->{user_agent} );
+    return $ua->get($url);
 }
 
 # generates a url from the options
