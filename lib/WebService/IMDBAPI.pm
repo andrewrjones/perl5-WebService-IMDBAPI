@@ -44,20 +44,9 @@ sub search_by_title {
 
         # TODO: do something
     }
+    $options->{title} = $title;
 
-    # TODO: parse options (merge hash?)
-
-    # TODO: get from options
-    my $url = $self->_generate_url(
-        {
-            title   => $title,
-            plot    => 'simple',
-            limit   => 1,
-            aka     => 'simple',
-            release => 'simple'
-        }
-    );
-
+    my $url = $self->_generate_url($options);
     my $ua = LWP::UserAgent->new();
     $ua->agent( $self->{user_agent} );
     my $response = $ua->get($url);
