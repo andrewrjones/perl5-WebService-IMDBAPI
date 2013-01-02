@@ -38,7 +38,7 @@ __END__
 
 =head1 DESCRIPTION
 
-See http://imdbapi.org/#fields for details of the attributes contained in this object.
+See L<http://imdbapi.org/#fields> for details of the attributes contained in this object.
 
 Note that the presence and contents of some of these attributes can differ depending on the options passed to the search.
 
