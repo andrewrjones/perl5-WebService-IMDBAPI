@@ -65,6 +65,12 @@ sub search_by_id {
     my ( $self, $id, $options ) = @_;
 }
 
+# carries out the search
+sub _do_search {
+
+    # TODO: extract out the search request functionality to here.
+}
+
 # generates a url from the options
 sub _generate_url {
     my ( $self, $options ) = @_;
