@@ -1,4 +1,5 @@
 *~
+*#
 .build
 WebService-TVDB-*
 lib/WebService/TVDB/Languages.pm
