@@ -23,9 +23,6 @@ $result = $imdbapi->search_by_title($title);
 is( $result->title,   $title );
 is( $result->imdb_id, $imdb_id );
 
-SKIP: {
-    skip "TODO", 2;
-    $result = $imdbapi->search_by_id($imdb_id);
-    is( $result->title,   $title );
-    is( $result->imdb_id, $imdb_id );
-}
+$result = $imdbapi->search_by_id($imdb_id);
+is( $result->title,   $title );
+is( $result->imdb_id, $imdb_id );
