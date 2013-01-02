@@ -45,7 +45,7 @@ sub search_by_title {
     $options->{title} = $title;
 
     my $url = $self->_generate_url($options);
-    my $ua = LWP::UserAgent->new();
+    my $ua  = LWP::UserAgent->new();
     $ua->agent( $self->{user_agent} );
     my $response = $ua->get($url);
 
