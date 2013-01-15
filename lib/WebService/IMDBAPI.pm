@@ -77,7 +77,7 @@ sub search_by_id {
         my $content = decode_json( $response->content );
 
         if ( $content->{error} ) {
-            return undef;
+            return;
         }
         my $result = WebService::IMDBAPI::Result->new( %{$content} );
         return $result;
