@@ -46,10 +46,15 @@ sub search_by_title {
     my $response = $self->_do_search($options);
     if ( $response->is_success ) {
 
+        my $content = decode_json( $response->content );
+
         my @results;
-        for ( @{ decode_json( $response->content ) } ) {
-            my $result = WebService::IMDBAPI::Result->new( %{$_} );
-            push( @results, $result );
+        if ( ref($content) eq 'ARRAY' ) {
+
+            for ( @{ decode_json( $response->content ) } ) {
+                my $result = WebService::IMDBAPI::Result->new( %{$_} );
+                push( @results, $result );
+            }
         }
         return \@results;
     }
@@ -69,8 +74,12 @@ sub search_by_id {
     my $response = $self->_do_search($options);
     if ( $response->is_success ) {
 
-        my $result = WebService::IMDBAPI::Result->new(
-            %{ decode_json( $response->content ) } );
+        my $content = decode_json( $response->content );
+
+        if ( $content->{error} ) {
+            return undef;
+        }
+        my $result = WebService::IMDBAPI::Result->new( %{$content} );
         return $result;
     }
     else {

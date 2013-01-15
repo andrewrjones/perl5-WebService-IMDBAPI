@@ -1,4 +1,5 @@
 {{$NEXT}}
+    Respond correctly if no results found.
 
 1.130030  2013-01-03 20:46:58 Europe/London
     Ensure we can pass '0' as a URL parameter.
